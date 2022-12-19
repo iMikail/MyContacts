@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315429509FB200FDB541 /* AppDelegate.swift */; };
 		A88A315729509FB200FDB541 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315629509FB200FDB541 /* SceneDelegate.swift */; };
-		A88A315929509FB200FDB541 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315829509FB200FDB541 /* ViewController.swift */; };
+		A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315829509FB200FDB541 /* ContactsViewController.swift */; };
 		A88A315E29509FB400FDB541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A88A315D29509FB400FDB541 /* Assets.xcassets */; };
 		A88A316129509FB400FDB541 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A88A315F29509FB400FDB541 /* LaunchScreen.storyboard */; };
+		A88A316C2950BA2400FDB541 /* FavoriteContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316B2950BA2400FDB541 /* FavoriteContactsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A88A315129509FB200FDB541 /* task3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88A315429509FB200FDB541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A88A315629509FB200FDB541 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A88A315829509FB200FDB541 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A88A315829509FB200FDB541 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A88A315D29509FB400FDB541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "task3/Supporting files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		A88A316029509FB400FDB541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A88A316229509FB400FDB541 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "task3/Supporting files/Info.plist"; sourceTree = SOURCE_ROOT; };
+		A88A316B2950BA2400FDB541 /* FavoriteContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteContactsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,7 @@
 			children = (
 				A88A315429509FB200FDB541 /* AppDelegate.swift */,
 				A88A315629509FB200FDB541 /* SceneDelegate.swift */,
-				A88A315829509FB200FDB541 /* ViewController.swift */,
+				A88A316A2950B9E300FDB541 /* Controller */,
 				A88A31682950A0EF00FDB541 /* Supporting files */,
 			);
 			path = task3;
@@ -70,6 +72,15 @@
 				A88A316229509FB400FDB541 /* Info.plist */,
 			);
 			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		A88A316A2950B9E300FDB541 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A88A315829509FB200FDB541 /* ContactsViewController.swift */,
+				A88A316B2950BA2400FDB541 /* FavoriteContactsViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +152,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		A88A31692950A20200FDB541 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -163,7 +175,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A88A315929509FB200FDB541 /* ViewController.swift in Sources */,
+				A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */,
+				A88A316C2950BA2400FDB541 /* FavoriteContactsViewController.swift in Sources */,
 				A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */,
 				A88A315729509FB200FDB541 /* SceneDelegate.swift in Sources */,
 			);
