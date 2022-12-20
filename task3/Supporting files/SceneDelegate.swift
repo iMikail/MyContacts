@@ -8,7 +8,6 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
   var window: UIWindow?
 
   func scene(_ scene: UIScene,
@@ -16,11 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
              options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
 
-    let contactsVC = ContactsViewController()
-    let navigationVC = UINavigationController(rootViewController: contactsVC)
-    let favoriteContactsVC = FavoriteContactsViewController()
-    let tabBarVC = UITabBarController()
-    tabBarVC.viewControllers = [navigationVC, favoriteContactsVC]
+    let tabBarVC = TabBarController()
 
     window = UIWindow(windowScene: windowScene)
     window?.rootViewController = tabBarVC

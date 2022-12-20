@@ -12,18 +12,20 @@
 		A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315829509FB200FDB541 /* ContactsViewController.swift */; };
 		A88A315E29509FB400FDB541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A88A315D29509FB400FDB541 /* Assets.xcassets */; };
 		A88A316129509FB400FDB541 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A88A315F29509FB400FDB541 /* LaunchScreen.storyboard */; };
-		A88A316C2950BA2400FDB541 /* FavoriteContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316B2950BA2400FDB541 /* FavoriteContactsViewController.swift */; };
+		A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */; };
+		A88A316E2950D21600FDB541 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316D2950D21600FDB541 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A88A315129509FB200FDB541 /* task3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88A315429509FB200FDB541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A88A315629509FB200FDB541 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A88A315829509FB200FDB541 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		A88A315829509FB200FDB541 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		A88A315D29509FB400FDB541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "task3/Supporting files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		A88A316029509FB400FDB541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A88A316229509FB400FDB541 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "task3/Supporting files/Info.plist"; sourceTree = SOURCE_ROOT; };
-		A88A316B2950BA2400FDB541 /* FavoriteContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteContactsViewController.swift; sourceTree = "<group>"; };
+		A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesContactsViewController.swift; sourceTree = "<group>"; };
+		A88A316D2950D21600FDB541 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +58,6 @@
 		A88A315329509FB200FDB541 /* task3 */ = {
 			isa = PBXGroup;
 			children = (
-				A88A315429509FB200FDB541 /* AppDelegate.swift */,
-				A88A315629509FB200FDB541 /* SceneDelegate.swift */,
 				A88A316A2950B9E300FDB541 /* Controller */,
 				A88A31682950A0EF00FDB541 /* Supporting files */,
 			);
@@ -67,6 +67,8 @@
 		A88A31682950A0EF00FDB541 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				A88A315629509FB200FDB541 /* SceneDelegate.swift */,
+				A88A315429509FB200FDB541 /* AppDelegate.swift */,
 				A88A315D29509FB400FDB541 /* Assets.xcassets */,
 				A88A315F29509FB400FDB541 /* LaunchScreen.storyboard */,
 				A88A316229509FB400FDB541 /* Info.plist */,
@@ -78,7 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				A88A315829509FB200FDB541 /* ContactsViewController.swift */,
-				A88A316B2950BA2400FDB541 /* FavoriteContactsViewController.swift */,
+				A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */,
+				A88A316D2950D21600FDB541 /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,8 +179,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */,
-				A88A316C2950BA2400FDB541 /* FavoriteContactsViewController.swift in Sources */,
+				A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */,
 				A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */,
+				A88A316E2950D21600FDB541 /* TabBarController.swift in Sources */,
 				A88A315729509FB200FDB541 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

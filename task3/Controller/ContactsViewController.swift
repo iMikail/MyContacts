@@ -12,7 +12,6 @@ class ContactsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .green
-    tabBarController?.view.backgroundColor = .red
   }
 
 }
