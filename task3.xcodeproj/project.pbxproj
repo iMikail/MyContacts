@@ -16,6 +16,8 @@
 		A88A316E2950D21600FDB541 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316D2950D21600FDB541 /* TabBarController.swift */; };
 		A88A31722951A5A700FDB541 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A88A31742951A5A700FDB541 /* Localizable.strings */; };
 		A88A31772951A71300FDB541 /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31762951A71300FDB541 /* LocalizationKeys.swift */; };
+		A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */; };
+		A88A317D2951ABE100FDB541 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A317C2951ABE100FDB541 /* Contacts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		A88A31732951A5A700FDB541 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A88A31752951A5BF00FDB541 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A88A31762951A71300FDB541 /* LocalizationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKeys.swift; sourceTree = "<group>"; };
+		A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		A88A317C2951ABE100FDB541 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 		A88A315329509FB200FDB541 /* task3 */ = {
 			isa = PBXGroup;
 			children = (
+				A88A317B2951ABCD00FDB541 /* Model */,
+				A88A31782951AAC100FDB541 /* View */,
 				A88A316A2950B9E300FDB541 /* Controller */,
 				A88A316F2951A56D00FDB541 /* Localization */,
 				A88A31682950A0EF00FDB541 /* Supporting files */,
@@ -99,6 +105,22 @@
 				A88A31742951A5A700FDB541 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		A88A31782951AAC100FDB541 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A88A317B2951ABCD00FDB541 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A88A317C2951ABE100FDB541 /* Contacts.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +217,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A88A317D2951ABE100FDB541 /* Contacts.swift in Sources */,
+				A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */,
 				A88A31772951A71300FDB541 /* LocalizationKeys.swift in Sources */,
 				A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */,
 				A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */,
