@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  task3
+
+  Created by Misha Volkov on 20.12.22.
+  
+*/
+
+"titleTabBarItemContactsList" = "Список контактов";
+"titleTabBarItemFavoritesContacts" = "Любимые контакты";
+"titleContactsVC" = "Контакты";

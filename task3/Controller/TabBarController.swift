@@ -15,20 +15,26 @@ final class TabBarController: UITabBarController {
 
     var title: String {
       switch self {
-      case .contacts: return "Contacts list"
-      case .favorites: return "Favorite contacts"
+      case .contacts:
+          return NSLocalizedString(LocalizationKeys.titleTabBarItemContactsList.rawValue, comment: "")
+      case .favorites:
+          return NSLocalizedString(LocalizationKeys.titleTabBarItemFavoritesContacts.rawValue, comment: "")
       }
     }
     var imageName: String {
       switch self {
-      case .contacts: return "person.crop.circle"
-      case .favorites: return "star"
+      case .contacts:
+          return "person.crop.circle"
+      case .favorites:
+          return "star"
       }
     }
     var selectedImageName: String {
       switch self {
-      case .contacts: return "person.crop.circle.fill"
-      case .favorites: return "star.fill"
+      case .contacts:
+          return "person.crop.circle.fill"
+      case .favorites:
+          return "star.fill"
       }
     }
   }
@@ -46,6 +52,7 @@ final class TabBarController: UITabBarController {
       switch $0 {
       case .contacts:
           let contactVC = ContactsViewController()
+          contactVC.title = NSLocalizedString(LocalizationKeys.titleContactsVC.rawValue, comment: "")
 
           return UINavigationController(rootViewController: contactVC)
       case .favorites:
