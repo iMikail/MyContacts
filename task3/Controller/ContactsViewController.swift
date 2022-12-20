@@ -9,7 +9,7 @@ import UIKit
 import Contacts
 
 final class ContactsViewController: UIViewController {
-  private var contacts = [Int]()
+  private var contacts = [CNContact]()
 
   private lazy var tableView: UITableView = {
     let tableView = UITableView()
@@ -67,41 +67,59 @@ final class ContactsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    addSubviews()
-    createConstraints()
+
     if CNContactStore.authorizationStatus(for: .contacts) == .denied {
       setupDeniedAccessView()
     }
-  }
-
-
-
-  @objc private func loadContacts() {
-    CNContactStore().requestAccess(for: .contacts) { (access, error) in
-
+    if contacts.isEmpty {
+      setupLoadContactsButton()
     }
   }
 
-  private func addSubviews() {
-    view.addSubview(tableView)
-    view.addSubview(loadContactsButton)
+  @objc private func loadContacts() {
+    CNContactStore().requestAccess(for: .contacts) { [weak self](access, error) in
+      guard let self = self else { return }
+      guard access == true else {
+        self.setupDeniedAccessView()
+        return
+      }
+
+      let store = CNContactStore()
+      let keysToFetch = [
+        CNContactFormatter.descriptorForRequiredKeys(for: .fullName)
+      ]
+      let request = CNContactFetchRequest(keysToFetch: keysToFetch)
+      do {
+        try store.enumerateContacts(with: request) { (contact, stop) in
+          self.contacts.append(contact)
+        }
+      } catch {
+        print("unable to fetch contacts")
+      }
+      self.setupTableView()
+    }
   }
 
-  private func createConstraints() {
-    var constraints = [NSLayoutConstraint]()
-//    let space: CGFloat = 5.0
+  private func setupLoadContactsButton() {
+    view.addSubview(loadContactsButton)
 
-    constraints.append(tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor))
-    constraints.append(tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
-    constraints.append(tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor))
-    constraints.append(tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+    NSLayoutConstraint.activate([
+      loadContactsButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 150.0),
+      loadContactsButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50.0),
+      loadContactsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      loadContactsButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    ])
+  }
 
-    constraints.append(loadContactsButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 150.0))
-    constraints.append(loadContactsButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50.0))
-    constraints.append(loadContactsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor))
-    constraints.append(loadContactsButton.centerYAnchor.constraint(equalTo: view.centerYAnchor))
+  private func setupTableView() {
+    view.addSubview(tableView)
 
-    NSLayoutConstraint.activate(constraints)
+    NSLayoutConstraint.activate([
+      tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+      tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+      tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    ])
   }
 
   private func setupDeniedAccessView() {
@@ -145,5 +163,8 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
     return contactCell
   }
 
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    print("seleceted")
+  }
 
 }
