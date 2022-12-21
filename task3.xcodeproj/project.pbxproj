@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A809D51E29533D8C007C85F7 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A809D51D29533D8C007C85F7 /* ContactsManager.swift */; };
 		A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315429509FB200FDB541 /* AppDelegate.swift */; };
 		A88A315729509FB200FDB541 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315629509FB200FDB541 /* SceneDelegate.swift */; };
 		A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315829509FB200FDB541 /* ContactsViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A809D51D29533D8C007C85F7 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
 		A88A315129509FB200FDB541 /* task3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88A315429509FB200FDB541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A88A315629509FB200FDB541 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A809D51C29533D6F007C85F7 /* Contacts Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A809D51D29533D8C007C85F7 /* ContactsManager.swift */,
+			);
+			path = "Contacts Manager";
+			sourceTree = "<group>";
+		};
 		A88A314829509FB200FDB541 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +77,7 @@
 		A88A315329509FB200FDB541 /* task3 */ = {
 			isa = PBXGroup;
 			children = (
+				A809D51C29533D6F007C85F7 /* Contacts Manager */,
 				A88A317B2951ABCD00FDB541 /* Model */,
 				A88A31782951AAC100FDB541 /* View */,
 				A88A316A2950B9E300FDB541 /* Controller */,
@@ -218,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A88A317D2951ABE100FDB541 /* Contacts.swift in Sources */,
+				A809D51E29533D8C007C85F7 /* ContactsManager.swift in Sources */,
 				A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */,
 				A88A31772951A71300FDB541 /* LocalizationKeys.swift in Sources */,
 				A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */,

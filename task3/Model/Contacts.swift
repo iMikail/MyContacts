@@ -8,14 +8,14 @@
 import Contacts
 
 final class Contacts {
-  private var givenName: String
-  private var middleName: String
-  private var familyName: String
+  private let givenName: String
+  private let middleName: String
+  private let familyName: String
   internal var fullName: String {
     return "\(familyName) \(givenName) \(middleName)"
   }
-  internal var phoneNumbers: String?
-  internal var imageData: Data?
+  internal let phoneNumbers: String?
+  internal let imageData: Data?
   internal var isFavorite = false
 
   init(contact: CNContact) {
@@ -24,5 +24,9 @@ final class Contacts {
     familyName = contact.familyName
     phoneNumbers = contact.phoneNumbers.first?.value.stringValue
     imageData = contact.imageData
+  }
+
+  internal func setFavorite() {
+    isFavorite = !isFavorite
   }
 }

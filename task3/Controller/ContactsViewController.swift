@@ -6,19 +6,15 @@
 //
 
 import UIKit
-import Contacts
 
 final class ContactsViewController: UIViewController {
   // MARK: - Variables
-  private var contacts = [CNContact]() {
+  private let contactsManager = ContactsManager.shared
+  private var isLoaded = false {
     didSet {
-      if contacts.isEmpty {
-        tableView.isHidden = true
-        loadContactsButton.isHidden = false
-      } else {
-        tableView.isHidden = false
-        loadContactsButton.isHidden = true
-      }
+      tableView.reloadData()
+      tableView.isHidden = !isLoaded
+      loadContactsButton.isHidden = isLoaded
     }
   }
 
@@ -83,52 +79,24 @@ final class ContactsViewController: UIViewController {
     view.backgroundColor = .systemBackground
     setupTableView()
 
-    if CNContactStore.authorizationStatus(for: .contacts) == .denied {
-      setupDeniedAccessView()
-    }
-    if contacts.isEmpty {
+    if contactsManager.appContacts.isEmpty {
       setupLoadContactsButton()
+    }
+
+    if !contactsManager.authorizationStatus() {
+      setupDeniedAccessView()
     }
   }
 
   @objc private func requestAccess() {
-    CNContactStore().requestAccess(for: .contacts) { [weak self](access, error) in
-      guard let self = self else { return }
-      guard access == true else {
-        self.setupDeniedAccessView()
-        return
-      }
-
-      if let error = error {
-        print(error.localizedDescription)
+    contactsManager.isLoaded = { access in
+      if access {
+        self.isLoaded = access
       } else {
-        self.loadContacts()
+        self.setupDeniedAccessView()
       }
     }
-  }
-
-  private func loadContacts() {
-    DispatchQueue.global(qos: .background).async {
-      let store = CNContactStore()
-      let keysToFetch = [
-        CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
-        CNContactPhoneNumbersKey as CNKeyDescriptor,
-        CNContactImageDataKey as CNKeyDescriptor
-      ]
-      let request = CNContactFetchRequest(keysToFetch: keysToFetch)
-      do {
-        try store.enumerateContacts(with: request) { [weak self](contact, _) in
-          guard let self = self else { return }
-
-          DispatchQueue.main.async {
-            self.contacts.append(contact)
-            self.tableView.reloadData()  // !! сделать в конце
-          }
-        }
-      } catch let error as NSError {
-        print(error.localizedDescription)
-      }
-    }
+    contactsManager.requestAccess()
   }
 
   private func setupLoadContactsButton() {
@@ -179,7 +147,7 @@ final class ContactsViewController: UIViewController {
 // MARK: - Extension
 extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
   internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return contacts.count
+    return contactsManager.appContacts.count
   }
 
   internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -190,13 +158,13 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
       return UITableViewCell()
     }
 
-    contactCell.contact = Contacts(contact: contacts[indexPath.row])
+    contactCell.contact = contactsManager.appContacts[indexPath.row]
 
     return contactCell
   }
 
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("seleceted")
+  internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
   }
 
 }

@@ -85,7 +85,7 @@ final class ContactsTableViewCell: UITableViewCell {
     let action = UIAction { [weak self] _ in
       guard let self = self else { return }
 
-      self.contact?.isFavorite = !(self.contact?.isFavorite ?? true)
+      self.contact?.setFavorite()
       self.updateFavoritesButtonImage()
     }
     favoritesButton.addAction(action, for: .touchUpInside)
