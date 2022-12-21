@@ -26,7 +26,7 @@ final class TabBarController: UITabBarController {
       case .contacts:
           return "person.crop.circle"
       case .favorites:
-          return "star"
+          return "heart"
       }
     }
     var selectedImageName: String {
@@ -34,7 +34,7 @@ final class TabBarController: UITabBarController {
       case .contacts:
           return "person.crop.circle.fill"
       case .favorites:
-          return "star.fill"
+          return "heart.fill"
       }
     }
   }
