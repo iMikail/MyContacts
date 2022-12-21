@@ -9,14 +9,27 @@ import UIKit
 import Contacts
 
 final class ContactsViewController: UIViewController {
-  private var contacts = [CNContact]()
+  // MARK: - Variables
+  private var contacts = [CNContact]() {
+    didSet {
+      if contacts.isEmpty {
+        tableView.isHidden = true
+        loadContactsButton.isHidden = false
+      } else {
+        tableView.isHidden = false
+        loadContactsButton.isHidden = true
+      }
+    }
+  }
 
+  // MARK: - UIViews
   private lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.register(ContactsTableViewCell.self, forCellReuseIdentifier: ContactsTableViewCell.identifier)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.isHidden = true
 
     return tableView
   }()
@@ -24,7 +37,7 @@ final class ContactsViewController: UIViewController {
     let button = UIButton(configuration: .bordered())
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setTitle(NSLocalizedString(LocalizationKeys.titleLoadContactsButton.rawValue, comment: ""), for: .normal)
-    button.addTarget(self, action: #selector(loadContacts), for: .touchUpInside)
+    button.addTarget(self, action: #selector(requestAccess), for: .touchUpInside)
 
     return button
   }()
@@ -64,9 +77,11 @@ final class ContactsViewController: UIViewController {
     return button
   }()
 
+  // MARK: - Functions
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
+    setupTableView()
 
     if CNContactStore.authorizationStatus(for: .contacts) == .denied {
       setupDeniedAccessView()
@@ -76,7 +91,7 @@ final class ContactsViewController: UIViewController {
     }
   }
 
-  @objc private func loadContacts() {
+  @objc private func requestAccess() {
     CNContactStore().requestAccess(for: .contacts) { [weak self](access, error) in
       guard let self = self else { return }
       guard access == true else {
@@ -84,19 +99,35 @@ final class ContactsViewController: UIViewController {
         return
       }
 
+      if let error = error {
+        print(error.localizedDescription)
+      } else {
+        self.loadContacts()
+      }
+    }
+  }
+
+  private func loadContacts() {
+    DispatchQueue.global(qos: .background).async {
       let store = CNContactStore()
       let keysToFetch = [
-        CNContactFormatter.descriptorForRequiredKeys(for: .fullName)
+        CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+        CNContactPhoneNumbersKey as CNKeyDescriptor,
+        CNContactImageDataKey as CNKeyDescriptor
       ]
       let request = CNContactFetchRequest(keysToFetch: keysToFetch)
       do {
-        try store.enumerateContacts(with: request) { (contact, stop) in
-          self.contacts.append(contact)
+        try store.enumerateContacts(with: request) { [weak self](contact, _) in
+          guard let self = self else { return }
+
+          DispatchQueue.main.async {
+            self.contacts.append(contact)
+            self.tableView.reloadData()  // !! сделать в конце
+          }
         }
-      } catch {
-        print("unable to fetch contacts")
+      } catch let error as NSError {
+        print(error.localizedDescription)
       }
-      self.setupTableView()
     }
   }
 
@@ -145,6 +176,7 @@ final class ContactsViewController: UIViewController {
   }
 }
 
+// MARK: - Extension
 extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
   internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return contacts.count
@@ -158,7 +190,7 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
       return UITableViewCell()
     }
 
-    //contactCell.contact = Contacts()
+    contactCell.contact = Contacts(contact: contacts[indexPath.row])
 
     return contactCell
   }

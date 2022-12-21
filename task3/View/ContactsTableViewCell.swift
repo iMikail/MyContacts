@@ -71,9 +71,13 @@ final class ContactsTableViewCell: UITableViewCell {
   private func setupCell() {
     guard let contact = contact else { return }
 
-    fotoImageView.image = UIImage(systemName: "photo.circle")
-    fullNameLabel.text = "bar baz foo"
-    phoneNumberLabel.text = "2343534554"
+    if let imageData = contact.imageData {
+      fotoImageView.image = UIImage(data: imageData)
+    } else {
+      fotoImageView.image = UIImage(systemName: "photo.circle")
+    }
+    fullNameLabel.text = contact.fullName
+    phoneNumberLabel.text = contact.phoneNumbers
     updateFavoritesButtonImage()
   }
 
