@@ -82,19 +82,16 @@ final class ContactsViewController: UIViewController {
     if contactsManager.appContacts.isEmpty {
       setupLoadContactsButton()
     }
-
     if !contactsManager.authorizationStatus() {
       setupDeniedAccessView()
     }
   }
 
   @objc private func requestAccess() {
-    contactsManager.isLoaded = { access in
-      if access {
-        self.isLoaded = access
-      } else {
-        self.setupDeniedAccessView()
-      }
+    contactsManager.loadedHandler = { [weak self] access in
+      guard let self = self else { return }
+      
+      access ? self.isLoaded = access : self.setupDeniedAccessView()
     }
     contactsManager.requestAccess()
   }

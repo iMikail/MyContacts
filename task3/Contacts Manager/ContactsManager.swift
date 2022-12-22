@@ -11,12 +11,11 @@ final class ContactsManager {
   static let shared = ContactsManager()
 
 // MARK: - Variables
-  private var deviceContacts = [CNContact]() // delete?
   internal var appContacts = [Contacts]()
   internal var favoriteContacts: [Contacts] {
     return appContacts.filter { $0.isFavorite == true }
   }
-  internal var isLoaded: ((Bool) -> Void) = { _ in }
+  internal var loadedHandler: ((Bool) -> Void) = { _ in }
 
 // MARK: - Functions
   private init() {}
@@ -34,7 +33,7 @@ final class ContactsManager {
       guard let self = self else { return }
       guard access == true else {
         DispatchQueue.main.async {
-          self.isLoaded(access)
+          self.loadedHandler(access)
         }
         return
       }
@@ -64,7 +63,7 @@ final class ContactsManager {
           DispatchQueue.main.async {
             let appContact = Contacts(contact: deviceContact)
             self.appContacts.append(appContact)
-            self.isLoaded(true)
+            self.loadedHandler(true)
           }
         }
       } catch let error as NSError {
@@ -73,8 +72,8 @@ final class ContactsManager {
     }
   }
 
-  internal func saveContacts() {
-
+  internal func removeContact(at index: Int) {
+    appContacts.remove(at: index)
   }
 
 }
