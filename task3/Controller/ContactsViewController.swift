@@ -161,7 +161,9 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    let detailVC = DetailViewController()
+    detailVC.contact = contactsManager.appContacts[indexPath.row]
+    navigationController?.pushViewController(detailVC, animated: true)
   }
 
 }

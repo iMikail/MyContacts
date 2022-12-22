@@ -19,6 +19,7 @@
 		A88A31772951A71300FDB541 /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31762951A71300FDB541 /* LocalizationKeys.swift */; };
 		A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */; };
 		A88A317D2951ABE100FDB541 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A317C2951ABE100FDB541 /* Contacts.swift */; };
+		A8E9C3FE2954531400D65C29 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E9C3FD2954531400D65C29 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		A88A31762951A71300FDB541 /* LocalizationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKeys.swift; sourceTree = "<group>"; };
 		A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		A88A317C2951ABE100FDB541 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
+		A8E9C3FD2954531400D65C29 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				A88A315829509FB200FDB541 /* ContactsViewController.swift */,
+				A8E9C3FD2954531400D65C29 /* DetailViewController.swift */,
 				A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */,
 				A88A316D2950D21600FDB541 /* TabBarController.swift */,
 			);
@@ -235,6 +238,7 @@
 				A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */,
 				A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */,
 				A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */,
+				A8E9C3FE2954531400D65C29 /* DetailViewController.swift in Sources */,
 				A88A316E2950D21600FDB541 /* TabBarController.swift in Sources */,
 				A88A315729509FB200FDB541 /* SceneDelegate.swift in Sources */,
 			);
