@@ -12,4 +12,9 @@ enum LocalizationKeys: String {
   case titleLoadContactsButton
   case accessMessageForDeniedStatus
   case titleAppOptionsButton
+  case titleEditContactTabBarButton
+  case titleSaveContactTabBarButton
+  case phoneNumber
+  case fullName
+
 }

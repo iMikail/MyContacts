@@ -10,6 +10,14 @@ import UIKit
 final class DetailViewController: UIViewController {
   // MARK: - Variables
   internal var contact: Contacts?
+  private var textFields = [UITextField]()
+  override var isEditing: Bool {
+    didSet {
+      updateButtonTitle()
+      updateContactInfo()
+      updateTextFields()
+    }
+  }
 
   // MARK: - UIViews
   private lazy var fotoImageView: UIImageView = {
@@ -28,11 +36,23 @@ final class DetailViewController: UIViewController {
 
     return imageView
   }()
-  private lazy var fullNameLabel: UILabel = createTitleLabel(withTitle: "fullName")
+  private lazy var editButton: UIBarButtonItem = {
+    let action = UIAction { [weak self] _ in
+      guard let self = self else { return }
+
+      self.isEditing = !self.isEditing
+    }
+    let button = UIBarButtonItem(primaryAction: action)
+
+    return button
+  }()
+  private lazy var fullNameLabel: UILabel =
+  createTitleLabel(withTitle: NSLocalizedString(LocalizationKeys.fullName.rawValue, comment: ""))
   private lazy var fullNameTextField: UITextField = createTextField(withText: contact?.fullName ?? "")
   private lazy var fullNameStackView: UIStackView = createStackView(forViews: [fullNameLabel, fullNameTextField])
 
-  private lazy var phoneLabel: UILabel = createTitleLabel(withTitle: "Phone number")
+  private lazy var phoneLabel: UILabel =
+  createTitleLabel(withTitle: NSLocalizedString(LocalizationKeys.phoneNumber.rawValue, comment: ""))
   private lazy var phoneTextField: UITextField = createTextField(withText: contact?.phoneNumbers ?? "")
   private lazy var phoneStackView: UIStackView = createStackView(forViews: [phoneLabel, phoneTextField])
 
@@ -49,6 +69,7 @@ final class DetailViewController: UIViewController {
 
     return stackView
   }()
+
   // MARK: - Functions
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -56,7 +77,28 @@ final class DetailViewController: UIViewController {
     setupViews()
   }
 
+  private func updateTextFields() {
+    textFields.forEach {
+      $0.isUserInteractionEnabled = isEditing
+      $0.borderStyle = isEditing ? .roundedRect : .none
+    }
+  }
+
+  private func updateButtonTitle() {
+    if isEditing {
+      editButton.title = NSLocalizedString(LocalizationKeys.titleSaveContactTabBarButton.rawValue, comment: "")
+    } else {
+      editButton.title = NSLocalizedString(LocalizationKeys.titleEditContactTabBarButton.rawValue, comment: "")
+    }
+  }
+
+  private func updateContactInfo() {
+    contact?.fullName = fullNameTextField.text
+    contact?.phoneNumbers = phoneTextField.text
+  }
+
   private func setupViews() {
+    setupEditButton()
     view.addSubview(fotoImageView)
     view.addSubview(infoStackView)
 
@@ -65,9 +107,15 @@ final class DetailViewController: UIViewController {
       fotoImageView.widthAnchor.constraint(equalToConstant: fotoImageView.frame.width),
       fotoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       fotoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+      infoStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.5),
       infoStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       infoStackView.topAnchor.constraint(equalTo: fotoImageView.bottomAnchor, constant: 10.0)
     ])
+  }
+
+  private func setupEditButton() {
+    navigationItem.rightBarButtonItem = editButton
+    updateButtonTitle()
   }
 
   private func createTitleLabel(withTitle title: String) -> UILabel {
@@ -83,7 +131,9 @@ final class DetailViewController: UIViewController {
     let textField = UITextField()
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.text = text
-    textField.borderStyle = .roundedRect
+    textField.borderStyle = .none
+    textField.isUserInteractionEnabled = false
+    textFields.append(textField)
 
     return textField
   }

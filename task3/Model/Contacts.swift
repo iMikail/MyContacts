@@ -11,10 +11,8 @@ final class Contacts {
   private let givenName: String
   private let middleName: String
   private let familyName: String
-  internal var fullName: String {
-    return "\(familyName) \(givenName) \(middleName)"
-  }
-  internal let phoneNumbers: String?
+  internal var fullName: String?
+  internal var phoneNumbers: String?
   internal let imageData: Data?
   internal var isFavorite = false
 
@@ -22,6 +20,7 @@ final class Contacts {
     givenName = contact.givenName
     middleName = contact.middleName
     familyName = contact.familyName
+    fullName = "\(familyName) \(givenName) \(middleName)"
     phoneNumbers = contact.phoneNumbers.first?.value.stringValue
     imageData = contact.imageData
   }

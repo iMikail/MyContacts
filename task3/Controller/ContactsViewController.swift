@@ -87,6 +87,11 @@ final class ContactsViewController: UIViewController {
     }
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
+  }
+
   @objc private func requestAccess() {
     contactsManager.loadedHandler = { [weak self] access in
       guard let self = self else { return }

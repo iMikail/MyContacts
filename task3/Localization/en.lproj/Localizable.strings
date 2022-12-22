@@ -12,3 +12,7 @@
 "titleLoadContactsButton" = "Load contacts";
 "accessMessageForDeniedStatus" = "Please provide access to the contact book";
 "titleAppOptionsButton" = "Options";
+"titleEditContactTabBarButton" = "Edit";
+"titleSaveContactTabBarButton" = "Save";
+"phoneNumber" = "Phone number";
+"fullName" = "Full name";

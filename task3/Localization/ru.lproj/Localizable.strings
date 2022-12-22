@@ -12,3 +12,7 @@
 "titleLoadContactsButton" = "Загрузить контакты";
 "accessMessageForDeniedStatus" = "Пожалуйста, предоставьте доступ к контактной книге";
 "titleAppOptionsButton" = "Настройки";
+"titleEditContactTabBarButton" = "Редактировать";
+"titleSaveContactTabBarButton" = "Сохранить";
+"phoneNumber" = "Номер телефона";
+"fullName" = "ФИО";
