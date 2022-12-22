@@ -9,6 +9,7 @@ import UIKit
 
 final class DetailViewController: UIViewController {
   // MARK: - Variables
+  private var newCenterYConstraint: NSLayoutConstraint?
   internal var contact: Contacts?
   private var textFields = [UITextField]()
   override var isEditing: Bool {
@@ -46,14 +47,22 @@ final class DetailViewController: UIViewController {
 
     return button
   }()
-  private lazy var fullNameLabel: UILabel =
-  createTitleLabel(withTitle: NSLocalizedString(LocalizationKeys.fullName.rawValue, comment: ""))
-  private lazy var fullNameTextField: UITextField = createTextField(withText: contact?.fullName ?? "")
-  private lazy var fullNameStackView: UIStackView = createStackView(forViews: [fullNameLabel, fullNameTextField])
+  private lazy var fullNameLabel: UILabel = createTitleLabel(
+    withTitle: NSLocalizedString(LocalizationKeys.fullName.rawValue, comment: "")
+  )
+  private lazy var phoneLabel: UILabel = createTitleLabel(
+    withTitle: NSLocalizedString(LocalizationKeys.phoneNumber.rawValue, comment: "")
+  )
 
-  private lazy var phoneLabel: UILabel =
-  createTitleLabel(withTitle: NSLocalizedString(LocalizationKeys.phoneNumber.rawValue, comment: ""))
-  private lazy var phoneTextField: UITextField = createTextField(withText: contact?.phoneNumbers ?? "")
+  private lazy var fullNameTextField: UITextField = createTextField(withText: contact?.fullName ?? "")
+  private lazy var phoneTextField: UITextField = {
+    let textField = createTextField(withText: contact?.phoneNumbers ?? "")
+    textField.keyboardType = .numberPad
+
+    return textField
+  }()
+
+  private lazy var fullNameStackView: UIStackView = createStackView(forViews: [fullNameLabel, fullNameTextField])
   private lazy var phoneStackView: UIStackView = createStackView(forViews: [phoneLabel, phoneTextField])
 
   private lazy var infoStackView: UIStackView = {
@@ -75,8 +84,39 @@ final class DetailViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupViews()
+
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(updateViewsPosition(notification:)),
+                                           name: UIResponder.keyboardWillChangeFrameNotification,
+                                           object: nil)
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(updateViewsPosition(notification:)),
+                                           name: UIResponder.keyboardWillHideNotification,
+                                           object: nil)
   }
 
+  // Move views
+  @objc func updateViewsPosition(notification: Notification) {
+      guard
+        let userInfo = notification.userInfo as? [String: AnyObject],
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+      else { return }
+
+    let infoStackViewBottom = view.frame.height - (infoStackView.frame.origin.y + infoStackView.frame.height)
+    let height = keyboardFrame.height - infoStackViewBottom
+
+    if newCenterYConstraint == nil {
+      newCenterYConstraint = fotoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -height)
+      newCenterYConstraint?.priority = .required
+    }
+    newCenterYConstraint?.isActive = (notification.name == UIResponder.keyboardWillHideNotification) ? false : true
+  }
+
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    textFields.forEach { $0.resignFirstResponder() }
+  }
+
+  // MARK: Update info
   private func updateTextFields() {
     textFields.forEach {
       $0.isUserInteractionEnabled = isEditing
@@ -97,16 +137,20 @@ final class DetailViewController: UIViewController {
     contact?.phoneNumbers = phoneTextField.text
   }
 
+  // MARK: Setup Views
   private func setupViews() {
     setupEditButton()
     view.addSubview(fotoImageView)
     view.addSubview(infoStackView)
 
+    let centerYConstraint = fotoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    centerYConstraint.priority = .defaultLow
+
     NSLayoutConstraint.activate([
       fotoImageView.heightAnchor.constraint(equalToConstant: fotoImageView.frame.height),
       fotoImageView.widthAnchor.constraint(equalToConstant: fotoImageView.frame.width),
       fotoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      fotoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+      centerYConstraint,
       infoStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.5),
       infoStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       infoStackView.topAnchor.constraint(equalTo: fotoImageView.bottomAnchor, constant: 10.0)
@@ -118,6 +162,7 @@ final class DetailViewController: UIViewController {
     updateButtonTitle()
   }
 
+// MARK: Create Views
   private func createTitleLabel(withTitle title: String) -> UILabel {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
