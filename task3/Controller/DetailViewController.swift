@@ -9,7 +9,6 @@ import UIKit
 
 final class DetailViewController: UIViewController {
   // MARK: - Variables
-  private var newCenterYConstraint: NSLayoutConstraint?
   internal var contact: Contacts?
   private var textFields = [UITextField]()
   override var isEditing: Bool {
@@ -84,32 +83,6 @@ final class DetailViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupViews()
-
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(updateViewsPosition(notification:)),
-                                           name: UIResponder.keyboardWillChangeFrameNotification,
-                                           object: nil)
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(updateViewsPosition(notification:)),
-                                           name: UIResponder.keyboardWillHideNotification,
-                                           object: nil)
-  }
-
-  // Move views
-  @objc func updateViewsPosition(notification: Notification) {
-      guard
-        let userInfo = notification.userInfo as? [String: AnyObject],
-        let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-      else { return }
-
-    let infoStackViewBottom = view.frame.height - (infoStackView.frame.origin.y + infoStackView.frame.height)
-    let height = keyboardFrame.height - infoStackViewBottom
-
-    if newCenterYConstraint == nil {
-      newCenterYConstraint = fotoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -height)
-      newCenterYConstraint?.priority = .required
-    }
-    newCenterYConstraint?.isActive = (notification.name == UIResponder.keyboardWillHideNotification) ? false : true
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -150,7 +123,8 @@ final class DetailViewController: UIViewController {
       fotoImageView.heightAnchor.constraint(equalToConstant: fotoImageView.frame.height),
       fotoImageView.widthAnchor.constraint(equalToConstant: fotoImageView.frame.width),
       fotoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      centerYConstraint,
+      fotoImageView.centerYAnchor.constraint(lessThanOrEqualTo: view.centerYAnchor),
+      infoStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.keyboardLayoutGuide.topAnchor),
       infoStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.5),
       infoStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       infoStackView.topAnchor.constraint(equalTo: fotoImageView.bottomAnchor, constant: 10.0)
