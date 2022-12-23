@@ -16,3 +16,7 @@
 "titleSaveContactTabBarButton" = "Сохранить";
 "phoneNumber" = "Номер телефона";
 "fullName" = "ФИО";
+"titleCopyPhoneAlertAction" = "Скопировать телефон";
+"titleSharePhoneAlertAction" = "Поделиться телефоном";
+"titleDeleteContactAlertAction" = "Удалить контакт";
+"cancel" = "Отмена";

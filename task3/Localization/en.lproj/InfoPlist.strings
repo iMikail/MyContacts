@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  task3
+
+  Created by Misha Volkov on 23.12.22.
+  
+*/
+
+NSContactsUsageDescription = "Access is required to save information to the contact list.";

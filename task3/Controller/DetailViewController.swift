@@ -47,10 +47,10 @@ final class DetailViewController: UIViewController {
     return button
   }()
   private lazy var fullNameLabel: UILabel = createTitleLabel(
-    withTitle: NSLocalizedString(LocalizationKeys.fullName.rawValue, comment: "")
+    withTitle: NSLocalizedString(LocalizationKeys.DetailVC.fullName.rawValue, comment: "")
   )
   private lazy var phoneLabel: UILabel = createTitleLabel(
-    withTitle: NSLocalizedString(LocalizationKeys.phoneNumber.rawValue, comment: "")
+    withTitle: NSLocalizedString(LocalizationKeys.DetailVC.phoneNumber.rawValue, comment: "")
   )
 
   private lazy var fullNameTextField: UITextField = createTextField(withText: contact?.fullName ?? "")
@@ -99,9 +99,9 @@ final class DetailViewController: UIViewController {
 
   private func updateButtonTitle() {
     if isEditing {
-      editButton.title = NSLocalizedString(LocalizationKeys.titleSaveContactTabBarButton.rawValue, comment: "")
+      editButton.title = NSLocalizedString(LocalizationKeys.DetailVC.saveButton.rawValue, comment: "")
     } else {
-      editButton.title = NSLocalizedString(LocalizationKeys.titleEditContactTabBarButton.rawValue, comment: "")
+      editButton.title = NSLocalizedString(LocalizationKeys.DetailVC.editButton.rawValue, comment: "")
     }
   }
 

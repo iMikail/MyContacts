@@ -74,9 +74,6 @@ final class ContactsTableViewCell: UITableViewCell {
     if let imageData = contact.imageData {
       fotoImageView.image = UIImage(data: imageData)
     }
-//    else {
-//      fotoImageView.image = UIImage(systemName: "photo.circle")
-//    }
     fullNameLabel.text = contact.fullName
     phoneNumberLabel.text = contact.phoneNumber
     updateFavoritesButtonImage()

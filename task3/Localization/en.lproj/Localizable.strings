@@ -16,3 +16,7 @@
 "titleSaveContactTabBarButton" = "Save";
 "phoneNumber" = "Phone number";
 "fullName" = "Full name";
+"titleCopyPhoneAlertAction" = "Copy phone";
+"titleSharePhoneAlertAction" = "Share phone";
+"titleDeleteContactAlertAction" = "Delete contact";
+"cancel" = "Cancel";
