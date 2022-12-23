@@ -12,7 +12,7 @@ final class ContactsTableViewCell: UITableViewCell {
   static let identifier = "contactsTableCell"
   static let imageViewHeight: CGFloat = 50.0
 
-  internal var contact: Contacts? {
+  internal var contact: Contact? {
     didSet {
       setupCell()
     }
@@ -73,11 +73,12 @@ final class ContactsTableViewCell: UITableViewCell {
 
     if let imageData = contact.imageData {
       fotoImageView.image = UIImage(data: imageData)
-    } else {
-      fotoImageView.image = UIImage(systemName: "photo.circle")
     }
+//    else {
+//      fotoImageView.image = UIImage(systemName: "photo.circle")
+//    }
     fullNameLabel.text = contact.fullName
-    phoneNumberLabel.text = contact.phoneNumbers
+    phoneNumberLabel.text = contact.phoneNumber
     updateFavoritesButtonImage()
   }
 

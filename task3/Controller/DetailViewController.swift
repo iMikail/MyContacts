@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailViewController: UIViewController {
   // MARK: - Variables
-  internal var contact: Contacts?
+  internal var contact: Contact?
   private var textFields = [UITextField]()
   override var isEditing: Bool {
     didSet {
@@ -55,7 +55,7 @@ final class DetailViewController: UIViewController {
 
   private lazy var fullNameTextField: UITextField = createTextField(withText: contact?.fullName ?? "")
   private lazy var phoneTextField: UITextField = {
-    let textField = createTextField(withText: contact?.phoneNumbers ?? "")
+    let textField = createTextField(withText: contact?.phoneNumber ?? "")
     textField.keyboardType = .numberPad
 
     return textField
@@ -106,8 +106,10 @@ final class DetailViewController: UIViewController {
   }
 
   private func updateContactInfo() {
-    contact?.fullName = fullNameTextField.text
-    contact?.phoneNumbers = phoneTextField.text
+    if let fullName = fullNameTextField.text {
+      contact?.updateNames(fromFullName: fullName)
+    }
+    contact?.phoneNumber = phoneTextField.text
   }
 
   // MARK: Setup Views

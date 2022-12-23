@@ -5,14 +5,15 @@
 //  Created by Misha Volkov on 21.12.22.
 //
 
+import UIKit
 import Contacts
 
 final class ContactsManager {
   static let shared = ContactsManager()
 
 // MARK: - Variables
-  internal var appContacts = [Contacts]()
-  internal var favoriteContacts: [Contacts] {
+  internal var appContacts = [Contact]()
+  internal var favoriteContacts: [Contact] {
     return appContacts.filter { $0.isFavorite == true }
   }
   internal var loadedHandler: ((Bool) -> Void) = { _ in }
@@ -61,7 +62,7 @@ final class ContactsManager {
           guard let self = self else { return }
 
           DispatchQueue.main.async {
-            let appContact = Contacts(contact: deviceContact)
+            let appContact = self.createContact(from: deviceContact)
             self.appContacts.append(appContact)
             self.loadedHandler(true)
           }
@@ -70,6 +71,14 @@ final class ContactsManager {
         print(error.localizedDescription)
       }
     }
+  }
+
+  private func createContact(from contact: CNContact) -> Contact {
+    let phone = contact.phoneNumbers.first?.value.stringValue
+    let imageData = contact.imageData == nil ? UIImage(named: Contact.defaultImage)?.pngData() : contact.imageData
+
+    return Contact(givenName: contact.givenName, middleName: contact.middleName, familyName: contact.familyName,
+                   phoneNumber: phone, imageData: imageData)
   }
 
   internal func removeContact(at index: Int) {
