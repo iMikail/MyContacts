@@ -40,41 +40,6 @@ final class ContactsViewController: UIViewController {
 
     return button
   }()
-  private lazy var deniedAccessView: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = .lightGray
-    view.layer.borderColor = UIColor.darkGray.cgColor
-    view.layer.borderWidth = 2.0
-    view.layer.cornerRadius = 10.0
-
-    return view
-  }()
-  private lazy var accessMessageLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.numberOfLines = 0
-    label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 18.0)
-    label.text = NSLocalizedString(LocalizationKeys.accessMessageForDeniedStatus.rawValue, comment: "")
-
-    return label
-  }()
-  private lazy var appOptionsButton: UIButton = {
-    let button = UIButton(configuration: .gray())
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle(NSLocalizedString(LocalizationKeys.titleAppOptionsButton.rawValue, comment: ""), for: .normal)
-    let action = UIAction { _ in
-      guard let settingUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-
-      if UIApplication.shared.canOpenURL(settingUrl) {
-        UIApplication.shared.open(settingUrl)
-      }
-    }
-    button.addAction(action, for: .touchUpInside)
-
-    return button
-  }()
 
   // MARK: - Functions
   override func viewDidLoad() {
@@ -86,7 +51,7 @@ final class ContactsViewController: UIViewController {
       setupLoadContactsButton()
     }
     if !contactsManager.authorizationStatus() {
-      setupDeniedAccessView()
+      showDeniedAccessMessage()
     }
   }
 
@@ -104,9 +69,18 @@ final class ContactsViewController: UIViewController {
     }
   }
 
+  @objc private func requestAccess() {
+    contactsManager.loadedHandler = { [weak self] access in
+      guard let self = self else { return }
+      
+      access ? self.isLoaded = access : self.showDeniedAccessMessage()
+    }
+    contactsManager.requestAccess()
+  }
+
   private func showDetailAlert(forContact contact: Contact) {
     let alertController = UIAlertController(title: contact.givenName,
-                                            message: "", preferredStyle: .alert) // change sheet
+                                            message: "", preferredStyle: .alert)
     let copyPhoneAction = UIAlertAction(title: "Copy number", style: .default) { _ in
       UIPasteboard.general.string = contact.phoneNumber
     }
@@ -115,7 +89,6 @@ final class ContactsViewController: UIViewController {
       if let phone = contact.phoneNumber {
         text += "\n" + phone
       }
-
       let activityController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
       self?.present(activityController, animated: true)
     }
@@ -135,13 +108,20 @@ final class ContactsViewController: UIViewController {
     present(alertController, animated: true)
   }
 
-  @objc private func requestAccess() {
-    contactsManager.loadedHandler = { [weak self] access in
-      guard let self = self else { return }
+  private func showDeniedAccessMessage() {
+    let titleController = NSLocalizedString(LocalizationKeys.accessMessageForDeniedStatus.rawValue, comment: "")
+    let alertController = UIAlertController(title: titleController, message: nil, preferredStyle: .alert)
+    let titleButton = NSLocalizedString(LocalizationKeys.titleAppOptionsButton.rawValue, comment: "")
+    let optionAction = UIAlertAction(title: titleButton, style: .default) { _ in
+      guard let settingUrl = URL(string: UIApplication.openSettingsURLString) else { return }
 
-      access ? self.isLoaded = access : self.setupDeniedAccessView()
+      if UIApplication.shared.canOpenURL(settingUrl) {
+        UIApplication.shared.open(settingUrl)
+      }
     }
-    contactsManager.requestAccess()
+
+    alertController.addAction(optionAction)
+    present(alertController, animated: true)
   }
 
   private func setupLoadContactsButton() {
@@ -165,28 +145,6 @@ final class ContactsViewController: UIViewController {
       tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
   }
-
-  private func setupDeniedAccessView() {
-    deniedAccessView.addSubview(accessMessageLabel)
-    deniedAccessView.addSubview(appOptionsButton)
-    view.addSubview(deniedAccessView)
-
-    NSLayoutConstraint.activate([
-      deniedAccessView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
-      deniedAccessView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
-      deniedAccessView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      deniedAccessView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-      accessMessageLabel.heightAnchor.constraint(equalTo: deniedAccessView.heightAnchor, multiplier: 0.6),
-      accessMessageLabel.widthAnchor.constraint(equalTo: deniedAccessView.widthAnchor, multiplier: 0.8),
-      accessMessageLabel.centerXAnchor.constraint(equalTo: deniedAccessView.centerXAnchor),
-      accessMessageLabel.topAnchor.constraint(equalTo: deniedAccessView.topAnchor),
-      appOptionsButton.heightAnchor.constraint(equalTo: deniedAccessView.heightAnchor, multiplier: 0.25),
-      appOptionsButton.widthAnchor.constraint(equalTo: deniedAccessView.widthAnchor, multiplier: 0.75),
-      appOptionsButton.centerXAnchor.constraint(equalTo: deniedAccessView.centerXAnchor),
-      appOptionsButton.topAnchor.constraint(equalTo: accessMessageLabel.bottomAnchor)
-    ])
-
-  }
 }
 
 // MARK: - Extension
@@ -196,9 +154,8 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard
-      let contactCell = tableView.dequeueReusableCell(withIdentifier: ContactsTableViewCell.identifier,
-                                                 for: indexPath) as? ContactsTableViewCell
+    guard let contactCell = tableView.dequeueReusableCell(withIdentifier: ContactsTableViewCell.identifier,
+                                                          for: indexPath) as? ContactsTableViewCell
     else {
       return UITableViewCell()
     }
