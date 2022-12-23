@@ -77,12 +77,15 @@ final class ContactsManager {
     let phone = contact.phoneNumbers.first?.value.stringValue
     let imageData = contact.imageData == nil ? UIImage(named: Contact.defaultImage)?.pngData() : contact.imageData
 
-    return Contact(givenName: contact.givenName, middleName: contact.middleName, familyName: contact.familyName,
-                   phoneNumber: phone, imageData: imageData)
+    return Contact(id: contact.identifier, givenName: contact.givenName, middleName: contact.middleName,
+                   familyName: contact.familyName, phoneNumber: phone, imageData: imageData)
   }
 
-  internal func removeContact(at index: Int) {
-    appContacts.remove(at: index)
+  internal func removeContact(_ contact: Contact) {
+    if let index = appContacts.firstIndex(where: { $0.id == contact.id }) {
+      appContacts.remove(at: index)
+    }
+
   }
 
 }

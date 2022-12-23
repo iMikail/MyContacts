@@ -10,7 +10,8 @@ import Foundation
 final class Contact {
   static let defaultImage = "userIcon"
 
-  private var givenName: String
+  internal var id: String
+  internal var givenName: String
   private var middleName: String
   private var familyName: String
   internal var fullName: String { return "\(familyName) \(givenName) \(middleName)" }
@@ -18,8 +19,9 @@ final class Contact {
   internal let imageData: Data?
   internal var isFavorite = false
 
-  init(givenName: String, middleName: String, familyName: String,
+  init(id: String, givenName: String, middleName: String, familyName: String,
        phoneNumber: String?, imageData: Data?) {
+    self.id = id
     self.givenName = givenName
     self.middleName = middleName
     self.familyName = familyName

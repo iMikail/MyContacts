@@ -22,6 +22,9 @@ final class ContactsViewController: UIViewController {
   private lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.register(ContactsTableViewCell.self, forCellReuseIdentifier: ContactsTableViewCell.identifier)
+    let longPressRecognizer = UILongPressGestureRecognizer(target: self,
+                                                           action: #selector(longPress(longPressGestureRecognizer:)))
+    tableView.addGestureRecognizer(longPressRecognizer)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.dataSource = self
     tableView.delegate = self
@@ -92,10 +95,50 @@ final class ContactsViewController: UIViewController {
     tableView.reloadData()
   }
 
+  @objc private func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+    if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
+      let touchPoint = longPressGestureRecognizer.location(in: tableView)
+      if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+        showDetailAlert(forContact: contactsManager.appContacts[indexPath.row])
+      }
+    }
+  }
+
+  private func showDetailAlert(forContact contact: Contact) {
+    let alertController = UIAlertController(title: contact.givenName,
+                                            message: "", preferredStyle: .alert) // change sheet
+    let copyPhoneAction = UIAlertAction(title: "Copy number", style: .default) { _ in
+      UIPasteboard.general.string = contact.phoneNumber
+    }
+    let sharePhoneAction = UIAlertAction(title: "Share number", style: .default) { [weak self] _ in
+      var text = contact.fullName
+      if let phone = contact.phoneNumber {
+        text += "\n" + phone
+      }
+
+      let activityController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+      self?.present(activityController, animated: true)
+    }
+    let deleteContactAction = UIAlertAction(title: "Delete contact", style: .destructive) { [weak self] _ in
+      guard let self = self else { return }
+
+      self.contactsManager.removeContact(contact)
+      self.contactsManager.appContacts.isEmpty ? self.isLoaded = false : self.tableView.reloadData()
+    }
+    let canselAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+    alertController.addAction(copyPhoneAction)
+    alertController.addAction(sharePhoneAction)
+    alertController.addAction(deleteContactAction)
+    alertController.addAction(canselAction)
+
+    present(alertController, animated: true)
+  }
+
   @objc private func requestAccess() {
     contactsManager.loadedHandler = { [weak self] access in
       guard let self = self else { return }
-      
+
       access ? self.isLoaded = access : self.setupDeniedAccessView()
     }
     contactsManager.requestAccess()
