@@ -41,7 +41,7 @@ final class DetailViewController: UIViewController {
 
       self.isEditing = !self.isEditing
       if !self.isEditing {
-        self.updateContactInfo()
+        self.setContactInfo()
       }
     }
     let button = UIBarButtonItem(primaryAction: action)
@@ -49,10 +49,10 @@ final class DetailViewController: UIViewController {
     return button
   }()
   private lazy var fullNameLabel: UILabel = createTitleLabel(
-    withTitle: NSLocalizedString(LocalizationKeys.DetailVC.fullName.rawValue, comment: "")
+    withTitle: NSLocalizedString(AppLocalization.DetailVC.fullName.key, comment: "")
   )
   private lazy var phoneLabel: UILabel = createTitleLabel(
-    withTitle: NSLocalizedString(LocalizationKeys.DetailVC.phoneNumber.rawValue, comment: "")
+    withTitle: NSLocalizedString(AppLocalization.DetailVC.phoneNumber.key, comment: "")
   )
 
   private lazy var fullNameTextField: UITextField = createTextField(withText: contact.fullName)
@@ -91,7 +91,7 @@ final class DetailViewController: UIViewController {
     textFields.forEach { $0.resignFirstResponder() }
   }
 
-  // MARK: Update info
+  // MARK: Update views info
   private func updateTextFields() {
     textFields.forEach {
       $0.isUserInteractionEnabled = isEditing
@@ -101,43 +101,18 @@ final class DetailViewController: UIViewController {
 
   private func updateButtonTitle() {
     if isEditing {
-      editButton.title = NSLocalizedString(LocalizationKeys.DetailVC.saveButton.rawValue, comment: "")
+      editButton.title = NSLocalizedString(AppLocalization.DetailVC.saveButton.key, comment: "")
     } else {
-      editButton.title = NSLocalizedString(LocalizationKeys.DetailVC.editButton.rawValue, comment: "")
+      editButton.title = NSLocalizedString(AppLocalization.DetailVC.editButton.key, comment: "")
     }
   }
 
-  private func updateContactInfo() {
+  // MARK: Update contact info
+  private func setContactInfo() {
     if let fullName = fullNameTextField.text {
-      ContactsManager.shared.updateNames(forContact: contact, fromFullName: fullName)
+      ContactsManager.shared.setNames(forContact: contact, fromFullName: fullName)
     }
     contact.phoneNumber = phoneTextField.text
-  }
-
-  // MARK: Setup Views
-  private func setupViews() {
-    setupEditButton()
-    view.addSubview(fotoImageView)
-    view.addSubview(infoStackView)
-
-    let centerYConstraint = fotoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-    centerYConstraint.priority = .defaultLow
-
-    NSLayoutConstraint.activate([
-      fotoImageView.heightAnchor.constraint(equalToConstant: fotoImageView.frame.height),
-      fotoImageView.widthAnchor.constraint(equalToConstant: fotoImageView.frame.width),
-      fotoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      fotoImageView.centerYAnchor.constraint(lessThanOrEqualTo: view.centerYAnchor),
-      infoStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.keyboardLayoutGuide.topAnchor),
-      infoStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.5),
-      infoStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      infoStackView.topAnchor.constraint(equalTo: fotoImageView.bottomAnchor, constant: 10.0)
-    ])
-  }
-
-  private func setupEditButton() {
-    navigationItem.rightBarButtonItem = editButton
-    updateButtonTitle()
   }
 
 // MARK: Create Views
@@ -170,5 +145,32 @@ final class DetailViewController: UIViewController {
     stackView.distribution = .fill
 
     return stackView
+  }
+
+  // MARK: Setup Views
+
+  private func setupEditButton() {
+    navigationItem.rightBarButtonItem = editButton
+    updateButtonTitle()
+  }
+
+  private func setupViews() {
+    setupEditButton()
+    view.addSubview(fotoImageView)
+    view.addSubview(infoStackView)
+
+    let centerYConstraint = fotoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    centerYConstraint.priority = .defaultLow
+
+    NSLayoutConstraint.activate([
+      fotoImageView.heightAnchor.constraint(equalToConstant: fotoImageView.frame.height),
+      fotoImageView.widthAnchor.constraint(equalToConstant: fotoImageView.frame.width),
+      fotoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      fotoImageView.centerYAnchor.constraint(lessThanOrEqualTo: view.centerYAnchor),
+      infoStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.keyboardLayoutGuide.topAnchor),
+      infoStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.5),
+      infoStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      infoStackView.topAnchor.constraint(equalTo: fotoImageView.bottomAnchor, constant: 10.0)
+    ])
   }
 }

@@ -20,7 +20,6 @@ internal final class Storage {
         try FileManager.default.removeItem(at: url)
       }
       FileManager.default.createFile(atPath: url.path, contents: data)
-      print("save") // DELETE
     } catch {
       print(error.localizedDescription)
     }

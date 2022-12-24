@@ -35,7 +35,7 @@ final class ContactsViewController: UIViewController {
   private lazy var loadContactsButton: UIButton = {
     let button = UIButton(configuration: .bordered())
     button.translatesAutoresizingMaskIntoConstraints = false
-    let title = NSLocalizedString(LocalizationKeys.ContactListVC.loadContactsButton.rawValue, comment: "")
+    let title = NSLocalizedString(AppLocalization.ContactListVC.loadContactsButton.key, comment: "")
     button.setTitle(title, for: .normal)
     button.addTarget(self, action: #selector(requestAccess), for: .touchUpInside)
     button.isHidden = true
@@ -84,15 +84,16 @@ final class ContactsViewController: UIViewController {
     contactsManager.requestAccess()
   }
 
+  // MARK: AlertControllers
   private func showDetailAlert(forContact contact: Contact) {
     let alertController = UIAlertController(title: contact.givenName,
                                             message: "", preferredStyle: .alert)
-    let copyTitle = NSLocalizedString(LocalizationKeys.DetailAlert.copyPhone.rawValue, comment: "")
+    let copyTitle = NSLocalizedString(AppLocalization.DetailAlert.copyPhone.key, comment: "")
     let copyPhoneAction = UIAlertAction(title: copyTitle, style: .default) { _ in
       UIPasteboard.general.string = contact.phoneNumber
     }
 
-    let shareTitle = NSLocalizedString(LocalizationKeys.DetailAlert.sharePhone.rawValue, comment: "")
+    let shareTitle = NSLocalizedString(AppLocalization.DetailAlert.sharePhone.key, comment: "")
     let sharePhoneAction = UIAlertAction(title: shareTitle, style: .default) { [weak self] _ in
       var text = contact.fullName
       if let phone = contact.phoneNumber {
@@ -102,7 +103,7 @@ final class ContactsViewController: UIViewController {
       self?.present(activityController, animated: true)
     }
 
-    let deleteTitle = NSLocalizedString(LocalizationKeys.DetailAlert.deleteContact.rawValue, comment: "")
+    let deleteTitle = NSLocalizedString(AppLocalization.DetailAlert.deleteContact.key, comment: "")
     let deleteContactAction = UIAlertAction(title: deleteTitle, style: .destructive) { [weak self] _ in
       guard let self = self else { return }
 
@@ -110,7 +111,7 @@ final class ContactsViewController: UIViewController {
       self.contactsManager.appContacts.isEmpty ? self.isLoaded = false : self.tableView.reloadData()
     }
 
-    let cancelTitle = NSLocalizedString(LocalizationKeys.DetailAlert.cancel.rawValue, comment: "")
+    let cancelTitle = NSLocalizedString(AppLocalization.DetailAlert.cancel.key, comment: "")
     let canselAction = UIAlertAction(title: cancelTitle, style: .cancel)
 
     alertController.addAction(copyPhoneAction)
@@ -122,9 +123,9 @@ final class ContactsViewController: UIViewController {
   }
 
   private func showDeniedAccessMessage() {
-    let titleController = NSLocalizedString(LocalizationKeys.DeniedAccessAlert.message.rawValue, comment: "")
+    let titleController = NSLocalizedString(AppLocalization.DeniedAccessAlert.message.key, comment: "")
     let alertController = UIAlertController(title: titleController, message: nil, preferredStyle: .alert)
-    let titleButton = NSLocalizedString(LocalizationKeys.DeniedAccessAlert.button.rawValue, comment: "")
+    let titleButton = NSLocalizedString(AppLocalization.DeniedAccessAlert.button.key, comment: "")
     let optionAction = UIAlertAction(title: titleButton, style: .default) { _ in
       guard let settingUrl = URL(string: UIApplication.openSettingsURLString) else { return }
 
@@ -137,6 +138,7 @@ final class ContactsViewController: UIViewController {
     present(alertController, animated: true)
   }
 
+  // MARK: Setup views
   private func setupLoadContactsButton() {
     view.addSubview(loadContactsButton)
 
@@ -183,5 +185,4 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
     detailVC.contact = contactsManager.appContacts[indexPath.row]
     navigationController?.pushViewController(detailVC, animated: true)
   }
-
 }

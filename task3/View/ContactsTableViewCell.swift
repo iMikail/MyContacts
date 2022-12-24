@@ -83,7 +83,7 @@ final class ContactsTableViewCell: UITableViewCell {
     let action = UIAction { [weak self] _ in
       guard let self = self else { return }
       if let contact = self.contact {
-        ContactsManager.shared.updateFavorite(forContact: contact)
+        ContactsManager.shared.setFavorite(forContact: contact)
         self.updateFavoritesButtonImage()
       }
     }

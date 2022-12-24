@@ -16,9 +16,9 @@ final class TabBarController: UITabBarController {
     var title: String {
       switch self {
       case .contacts:
-          return NSLocalizedString(LocalizationKeys.ContactListVC.tabBarItem.rawValue, comment: "")
+          return NSLocalizedString(AppLocalization.ContactListVC.tabBarItem.key, comment: "")
       case .favorites:
-          return NSLocalizedString(LocalizationKeys.FavoritesContactsVC.tabBarItem.rawValue, comment: "")
+          return NSLocalizedString(AppLocalization.FavoritesContactsVC.tabBarItem.key, comment: "")
       }
     }
     var imageName: String {
@@ -45,14 +45,14 @@ final class TabBarController: UITabBarController {
     setupTabBar()
   }
 
-  private  func setupTabBar() {
+  private func setupTabBar() {
     let items = TabBarItem.allCases
 
     viewControllers = items.map {
       switch $0 {
       case .contacts:
           let contactVC = ContactsViewController()
-          contactVC.title = NSLocalizedString(LocalizationKeys.ContactListVC.title.rawValue, comment: "")
+          contactVC.title = NSLocalizedString(AppLocalization.ContactListVC.title.key, comment: "")
 
           return UINavigationController(rootViewController: contactVC)
       case .favorites:

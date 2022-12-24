@@ -16,7 +16,6 @@ final class ContactsManager {
   internal var appContacts: [Contact] {
     didSet {
       Storage.save(appContacts)
-      print("change appContactsss")
     }
   }
   internal var favoriteContacts: [Contact] {
@@ -83,38 +82,39 @@ final class ContactsManager {
 
   private func createContact(from contact: CNContact) -> Contact {
     let phone = contact.phoneNumbers.first?.value.stringValue
-    let imageData = contact.imageData == nil ? UIImage(named: Contact.defaultImage)?.pngData() : contact.imageData
+    let imageData = (contact.imageData == nil) ? UIImage(named: Contact.defaultImage)?.pngData() : contact.imageData
 
     return Contact(id: contact.identifier, givenName: contact.givenName, middleName: contact.middleName,
                    familyName: contact.familyName, phoneNumber: phone, imageData: imageData)
-  }
-
-  internal func updateFavorite(forContact contact: Contact) {
-    contact.isFavorite = !contact.isFavorite
-    Storage.save(appContacts)
-  }
-
-  internal func updateNames(forContact contact: Contact, fromFullName fullName: String) {
-    let names = fullName.split(separator: " ", maxSplits: 2).map { String($0) }
-
-    switch names.count {
-    case 0: setNames(forContact: contact, givenName: "?", middleName: "", familyName: "")
-    case 1: setNames(forContact: contact, givenName: names[0], middleName: "", familyName: "")
-    case 2: setNames(forContact: contact, givenName: names[1], middleName: "", familyName: names[0])
-    default: setNames(forContact: contact, givenName: names[1], middleName: names[2], familyName: names[0])
-    }
-  }
-
-  private func setNames(forContact contact: Contact, givenName: String, middleName: String, familyName: String) {
-    contact.givenName = givenName
-    contact.middleName = middleName
-    contact.familyName = familyName
-    Storage.save(appContacts)
   }
 
   internal func removeContact(_ contact: Contact) {
     if let index = appContacts.firstIndex(where: { $0.id == contact.id }) {
       appContacts.remove(at: index)
     }
+  }
+
+  // MARK: Setting contact info
+  internal func setFavorite(forContact contact: Contact) {
+    contact.isFavorite = !contact.isFavorite
+    Storage.save(appContacts)
+  }
+
+  internal func setNames(forContact contact: Contact, fromFullName fullName: String) {
+    let names = fullName.split(separator: " ", maxSplits: 2).map { String($0) }
+
+    switch names.count {
+    case 0: updateNames(forContact: contact, givenName: "?", middleName: "", familyName: "")
+    case 1: updateNames(forContact: contact, givenName: names[0], middleName: "", familyName: "")
+    case 2: updateNames(forContact: contact, givenName: names[1], middleName: "", familyName: names[0])
+    default: updateNames(forContact: contact, givenName: names[1], middleName: names[2], familyName: names[0])
+    }
+  }
+
+  private func updateNames(forContact contact: Contact, givenName: String, middleName: String, familyName: String) {
+    contact.givenName = givenName
+    contact.middleName = middleName
+    contact.familyName = familyName
+    Storage.save(appContacts)
   }
 }

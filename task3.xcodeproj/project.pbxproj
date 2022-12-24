@@ -16,7 +16,7 @@
 		A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */; };
 		A88A316E2950D21600FDB541 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316D2950D21600FDB541 /* TabBarController.swift */; };
 		A88A31722951A5A700FDB541 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A88A31742951A5A700FDB541 /* Localizable.strings */; };
-		A88A31772951A71300FDB541 /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31762951A71300FDB541 /* LocalizationKeys.swift */; };
+		A88A31772951A71300FDB541 /* AppLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31762951A71300FDB541 /* AppLocalization.swift */; };
 		A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */; };
 		A88A317D2951ABE100FDB541 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A317C2951ABE100FDB541 /* Contact.swift */; };
 		A8C27A622955EB68002ADEF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8C27A642955EB68002ADEF4 /* InfoPlist.strings */; };
@@ -37,7 +37,7 @@
 		A88A316D2950D21600FDB541 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A88A31732951A5A700FDB541 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A88A31752951A5BF00FDB541 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A88A31762951A71300FDB541 /* LocalizationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKeys.swift; sourceTree = "<group>"; };
+		A88A31762951A71300FDB541 /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
 		A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		A88A317C2951ABE100FDB541 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		A8C27A632955EB68002ADEF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		A88A316F2951A56D00FDB541 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				A88A31762951A71300FDB541 /* LocalizationKeys.swift */,
+				A88A31762951A71300FDB541 /* AppLocalization.swift */,
 				A8C27A642955EB68002ADEF4 /* InfoPlist.strings */,
 				A88A31742951A5A700FDB541 /* Localizable.strings */,
 			);
@@ -251,7 +251,7 @@
 				A8F3C8EA2956E76E0042AE36 /* Storage.swift in Sources */,
 				A809D51E29533D8C007C85F7 /* ContactsManager.swift in Sources */,
 				A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */,
-				A88A31772951A71300FDB541 /* LocalizationKeys.swift in Sources */,
+				A88A31772951A71300FDB541 /* AppLocalization.swift in Sources */,
 				A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */,
 				A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */,
 				A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */,

@@ -64,9 +64,4 @@ extension FavoritesContactsViewController: UITableViewDelegate, UITableViewDataS
 
     return contactCell
   }
-
-  internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-  }
-
 }
