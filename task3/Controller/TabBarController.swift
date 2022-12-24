@@ -39,10 +39,13 @@ final class TabBarController: UITabBarController {
     }
   }
 
+  private var animationImages: [UIImageView]?
+
   override func viewDidLoad() {
     super.viewDidLoad()
     tabBar.backgroundColor = .systemBackground
     setupTabBar()
+    animationImages = createAnimationImages()
   }
 
   private func setupTabBar() {
@@ -62,9 +65,37 @@ final class TabBarController: UITabBarController {
 
     viewControllers?.enumerated().forEach { (index, viewController) in
       let item = items[index]
-      viewController.tabBarItem = UITabBarItem(title: item.title,
-                                               image: UIImage(systemName: item.imageName),
-                                               selectedImage: UIImage(systemName: item.selectedImageName))
+      let tabBarItem = UITabBarItem(title: item.title,
+                                    image: UIImage(systemName: item.imageName),
+                                    selectedImage: UIImage(systemName: item.selectedImageName))
+      tabBarItem.tag = index
+      viewController.tabBarItem = tabBarItem
     }
+  }
+
+  override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    if let imageView = animationImages?[item.tag] {
+      imageView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+      UIView.animate(withDuration: 0.8,
+                     delay: .zero,
+                     usingSpringWithDamping: 0.7,
+                     initialSpringVelocity: 0.5,
+                     options: .curveLinear) {
+        imageView.transform = .identity
+      }
+    }
+  }
+
+  private func createAnimationImages() -> [UIImageView] {
+    var imageViews = [UIImageView]()
+
+    for item in TabBarItem.allCases {
+      if let imageView = tabBar.subviews[item.rawValue].subviews.first as? UIImageView {
+        imageView.contentMode = .center
+        imageViews.append(imageView)
+      }
+    }
+
+    return imageViews
   }
 }
