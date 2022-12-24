@@ -82,9 +82,10 @@ final class ContactsTableViewCell: UITableViewCell {
   private func configurationFavoritesButton() {
     let action = UIAction { [weak self] _ in
       guard let self = self else { return }
-
-      self.contact?.setFavorite()
-      self.updateFavoritesButtonImage()
+      if let contact = self.contact {
+        ContactsManager.shared.updateFavorite(forContact: contact)
+        self.updateFavoritesButtonImage()
+      }
     }
     favoritesButton.addAction(action, for: .touchUpInside)
   }

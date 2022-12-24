@@ -9,12 +9,11 @@ import UIKit
 
 final class DetailViewController: UIViewController {
   // MARK: - Variables
-  internal var contact: Contact?
+  internal var contact = Contact(id: "", givenName: "", middleName: "", familyName: "", phoneNumber: "", imageData: nil)
   private var textFields = [UITextField]()
   override var isEditing: Bool {
     didSet {
       updateButtonTitle()
-      updateContactInfo()
       updateTextFields()
     }
   }
@@ -30,7 +29,7 @@ final class DetailViewController: UIViewController {
     imageView.contentMode = .scaleAspectFill
     imageView.layer.cornerRadius = imageView.frame.height / 2
 
-    if let imageData = contact?.imageData {
+    if let imageData = contact.imageData {
       imageView.image = UIImage(data: imageData)
     }
 
@@ -41,6 +40,9 @@ final class DetailViewController: UIViewController {
       guard let self = self else { return }
 
       self.isEditing = !self.isEditing
+      if !self.isEditing {
+        self.updateContactInfo()
+      }
     }
     let button = UIBarButtonItem(primaryAction: action)
 
@@ -53,9 +55,9 @@ final class DetailViewController: UIViewController {
     withTitle: NSLocalizedString(LocalizationKeys.DetailVC.phoneNumber.rawValue, comment: "")
   )
 
-  private lazy var fullNameTextField: UITextField = createTextField(withText: contact?.fullName ?? "")
+  private lazy var fullNameTextField: UITextField = createTextField(withText: contact.fullName)
   private lazy var phoneTextField: UITextField = {
-    let textField = createTextField(withText: contact?.phoneNumber ?? "")
+    let textField = createTextField(withText: contact.phoneNumber ?? "")
     textField.keyboardType = .numberPad
 
     return textField
@@ -107,9 +109,9 @@ final class DetailViewController: UIViewController {
 
   private func updateContactInfo() {
     if let fullName = fullNameTextField.text {
-      contact?.updateNames(fromFullName: fullName)
+      ContactsManager.shared.updateNames(forContact: contact, fromFullName: fullName)
     }
-    contact?.phoneNumber = phoneTextField.text
+    contact.phoneNumber = phoneTextField.text
   }
 
   // MARK: Setup Views

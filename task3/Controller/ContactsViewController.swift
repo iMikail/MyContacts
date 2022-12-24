@@ -38,6 +38,7 @@ final class ContactsViewController: UIViewController {
     let title = NSLocalizedString(LocalizationKeys.ContactListVC.loadContactsButton.rawValue, comment: "")
     button.setTitle(title, for: .normal)
     button.addTarget(self, action: #selector(requestAccess), for: .touchUpInside)
+    button.isHidden = true
 
     return button
   }()
@@ -47,10 +48,14 @@ final class ContactsViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
     setupTableView()
+    setupLoadContactsButton()
 
     if contactsManager.appContacts.isEmpty {
-      setupLoadContactsButton()
+      loadContactsButton.isHidden = false
+    } else {
+      isLoaded = true
     }
+
     if !contactsManager.authorizationStatus() {
       showDeniedAccessMessage()
     }

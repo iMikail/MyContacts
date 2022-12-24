@@ -10,16 +10,24 @@ import Contacts
 
 final class ContactsManager {
   static let shared = ContactsManager()
+  static let fileName = "Contacts"
 
 // MARK: - Variables
-  internal var appContacts = [Contact]()
+  internal var appContacts: [Contact] {
+    didSet {
+      Storage.save(appContacts)
+      print("change appContactsss")
+    }
+  }
   internal var favoriteContacts: [Contact] {
     return appContacts.filter { $0.isFavorite == true }
   }
   internal var loadedHandler: ((Bool) -> Void) = { _ in }
 
 // MARK: - Functions
-  private init() {}
+  private init() {
+    appContacts = Storage.retrieveContacts()
+  }
 
   internal func authorizationStatus() -> Bool {
     switch CNContactStore.authorizationStatus(for: .contacts) {
@@ -81,11 +89,32 @@ final class ContactsManager {
                    familyName: contact.familyName, phoneNumber: phone, imageData: imageData)
   }
 
+  internal func updateFavorite(forContact contact: Contact) {
+    contact.isFavorite = !contact.isFavorite
+    Storage.save(appContacts)
+  }
+
+  internal func updateNames(forContact contact: Contact, fromFullName fullName: String) {
+    let names = fullName.split(separator: " ", maxSplits: 2).map { String($0) }
+
+    switch names.count {
+    case 0: setNames(forContact: contact, givenName: "?", middleName: "", familyName: "")
+    case 1: setNames(forContact: contact, givenName: names[0], middleName: "", familyName: "")
+    case 2: setNames(forContact: contact, givenName: names[1], middleName: "", familyName: names[0])
+    default: setNames(forContact: contact, givenName: names[1], middleName: names[2], familyName: names[0])
+    }
+  }
+
+  private func setNames(forContact contact: Contact, givenName: String, middleName: String, familyName: String) {
+    contact.givenName = givenName
+    contact.middleName = middleName
+    contact.familyName = familyName
+    Storage.save(appContacts)
+  }
+
   internal func removeContact(_ contact: Contact) {
     if let index = appContacts.firstIndex(where: { $0.id == contact.id }) {
       appContacts.remove(at: index)
     }
-
   }
-
 }
