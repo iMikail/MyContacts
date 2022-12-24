@@ -8,7 +8,6 @@
 enum AppLocalization {
 
   enum ContactListVC: String {
-    case title = "titleContactsVC"
     case tabBarItem = "titleTabBarItemContactsList"
     case loadContactsButton = "titleLoadContactsButton"
 

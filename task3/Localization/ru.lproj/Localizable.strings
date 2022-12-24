@@ -8,7 +8,6 @@
 
 "titleTabBarItemContactsList" = "Список контактов";
 "titleTabBarItemFavoritesContacts" = "Любимые контакты";
-"titleContactsVC" = "Контакты";
 "titleLoadContactsButton" = "Загрузить контакты";
 "accessMessageForDeniedStatus" = "Пожалуйста, предоставьте доступ к контактной книге";
 "titleAppOptionsButton" = "Настройки";

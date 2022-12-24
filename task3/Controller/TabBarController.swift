@@ -52,7 +52,7 @@ final class TabBarController: UITabBarController {
       switch $0 {
       case .contacts:
           let contactVC = ContactsViewController()
-          contactVC.title = NSLocalizedString(AppLocalization.ContactListVC.title.key, comment: "")
+          contactVC.title = NSLocalizedString(AppLocalization.ContactListVC.tabBarItem.key, comment: "")
 
           return UINavigationController(rootViewController: contactVC)
       case .favorites:

@@ -50,14 +50,14 @@ final class ContactsViewController: UIViewController {
     setupTableView()
     setupLoadContactsButton()
 
-    if contactsManager.appContacts.isEmpty {
-      loadContactsButton.isHidden = false
-    } else {
-      isLoaded = true
-    }
-
     if !contactsManager.authorizationStatus() {
       showDeniedAccessMessage()
+    } else {
+      if contactsManager.appContacts.isEmpty {
+        loadContactsButton.isHidden = false
+      } else {
+        isLoaded = true
+      }
     }
   }
 
