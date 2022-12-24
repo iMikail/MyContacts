@@ -103,6 +103,24 @@ final class ContactsManager {
     Storage.save(appContacts)
   }
 
+  internal func setNames(forContact contact: Contact, fromFullName fullName: String) {
+    let names = fullName.split(separator: " ", maxSplits: 2).map { String($0) }
+
+    switch names.count {
+    case 0: updateNames(forContact: contact, givenName: ":]", middleName: "", familyName: "")
+    case 1: updateNames(forContact: contact, givenName: names[0], middleName: "", familyName: "")
+    case 2: updateNames(forContact: contact, givenName: names[1], middleName: "", familyName: names[0])
+    default: updateNames(forContact: contact, givenName: names[1], middleName: names[2], familyName: names[0])
+    }
+  }
+
+  private func updateNames(forContact contact: Contact, givenName: String, middleName: String, familyName: String) {
+    contact.givenName = givenName
+    contact.middleName = middleName
+    contact.familyName = familyName
+    Storage.save(appContacts)
+  }
+
   internal func setPhoneFormat(forContact contact: Contact, fromNumber number: String) {
     let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     var result = ""
@@ -127,49 +145,36 @@ final class ContactsManager {
   }
 
   private func maskFormat(forNumber number: String) -> String? {
-      switch number.count {
-      case 5: return PhoneMask.fiveNumbers.mask
-      case 7: return PhoneMask.sevenNumbers.mask
-      case 9: return PhoneMask.nineNumbers.mask
-      case 10:
-          switch number.first {
-          case "0": return PhoneMask.tenNumbersWithFirst0.mask
-          case "8": return PhoneMask.tenNumbersWithFirst8.mask
-          default: return nil
-          }
-      case 11: return PhoneMask.elevenNumbers.mask
-      case 12: return PhoneMask.twelveNumbers.mask
-      default: return nil
+    switch number.count {
+    case 10:
+      if let firstDigit = number.first, let index = Int("10\(firstDigit)") {
+        return PhoneMask(rawValue: index)?.mask
+      } else {
+        return nil
       }
-  }
-
-  internal func setNames(forContact contact: Contact, fromFullName fullName: String) {
-    let names = fullName.split(separator: " ", maxSplits: 2).map { String($0) }
-
-    switch names.count {
-    case 0: updateNames(forContact: contact, givenName: "?", middleName: "", familyName: "")
-    case 1: updateNames(forContact: contact, givenName: names[0], middleName: "", familyName: "")
-    case 2: updateNames(forContact: contact, givenName: names[1], middleName: "", familyName: names[0])
-    default: updateNames(forContact: contact, givenName: names[1], middleName: names[2], familyName: names[0])
+    default: return PhoneMask(rawValue: number.count)?.mask
     }
   }
 
-  private func updateNames(forContact contact: Contact, givenName: String, middleName: String, familyName: String) {
-    contact.givenName = givenName
-    contact.middleName = middleName
-    contact.familyName = familyName
-    Storage.save(appContacts)
-  }
+  private enum PhoneMask: Int {
+    case fiveNumbers = 5
+    case sevenNumbers = 7
+    case nineNumbers = 9
+    case tenNumbersWithFirst0 = 100
+    case tenNumbersWithFirst8 = 108
+    case elevenNumbers = 11
+    case twelveNumbers = 12
 
-  private enum PhoneMask: String {
-    case fiveNumbers = "X-XX-XX"
-    case sevenNumbers = "XXX-XX-XX"
-    case nineNumbers = "+375 (XX) XXX-XX-XX"
-    case tenNumbersWithFirst0 = "+375 (DXX) XXX-XX-XX"
-    case tenNumbersWithFirst8 = "X0XX-XXX-XX-XX"
-    case elevenNumbers = "XXXX-XXX-XX-XX"
-    case twelveNumbers = "+XXX (XX) XXX-XX-XX"
-
-    var mask: String { return self.rawValue }
+    var mask: String {
+      switch self {
+      case .fiveNumbers: return "X-XX-XX"
+      case .sevenNumbers: return "XXX-XX-XX"
+      case .nineNumbers: return "+375 (XX) XXX XX XX"
+      case .tenNumbersWithFirst0: return "+375 (DXX) XXX XX XX"
+      case .tenNumbersWithFirst8: return "X0XX-XXX-XX-XX"
+      case .elevenNumbers: return "XXXX-XXX-XX-XX"
+      case .twelveNumbers: return "+XXX (XX) XXX XX XX"
+      }
+    }
   }
 }
