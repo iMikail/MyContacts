@@ -39,10 +39,10 @@ final class DetailViewController: UIViewController {
     let action = UIAction { [weak self] _ in
       guard let self = self else { return }
 
-      self.isEditing = !self.isEditing
-      if !self.isEditing {
+      if self.isEditing {
         self.setContactInfo()
       }
+      self.isEditing = !self.isEditing
     }
     let button = UIBarButtonItem(primaryAction: action)
 
@@ -97,6 +97,8 @@ final class DetailViewController: UIViewController {
       $0.isUserInteractionEnabled = isEditing
       $0.borderStyle = isEditing ? .roundedRect : .none
     }
+    fullNameTextField.text = contact.fullName
+    phoneTextField.text = contact.phoneNumber
   }
 
   private func updateButtonTitle() {
@@ -109,13 +111,13 @@ final class DetailViewController: UIViewController {
 
   // MARK: Update contact info
   private func setContactInfo() {
-    if let fullName = fullNameTextField.text {
+    if let fullName = fullNameTextField.text, let number = phoneTextField.text {
       ContactsManager.shared.setNames(forContact: contact, fromFullName: fullName)
+      ContactsManager.shared.setPhoneFormat(forContact: contact, fromNumber: number)
     }
-    contact.phoneNumber = phoneTextField.text
   }
 
-// MARK: Create Views
+  // MARK: Create Views
   private func createTitleLabel(withTitle title: String) -> UILabel {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -148,7 +150,6 @@ final class DetailViewController: UIViewController {
   }
 
   // MARK: Setup Views
-
   private func setupEditButton() {
     navigationItem.rightBarButtonItem = editButton
     updateButtonTitle()
