@@ -23,18 +23,20 @@ final class TabBarController: UITabBarController {
     }
     var imageName: String {
       switch self {
-      case .contacts:
-          return "person.crop.circle"
-      case .favorites:
-          return "heart"
+      case .contacts: return "person.crop.circle"
+      case .favorites: return "heart"
       }
     }
     var selectedImageName: String {
       switch self {
-      case .contacts:
-          return "person.crop.circle.fill"
-      case .favorites:
-          return "heart.fill"
+      case .contacts: return "person.crop.circle.fill"
+      case .favorites: return "heart.fill"
+      }
+    }
+    var color: UIColor {
+      switch self {
+      case .contacts: return ContactsViewController.mainColor
+      case .favorites: return FavoritesContactsViewController.mainColor
       }
     }
   }
@@ -43,13 +45,14 @@ final class TabBarController: UITabBarController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    tabBar.backgroundColor = .systemBackground
     setupTabBar()
     animationImages = createAnimationImages()
   }
 
   private func setupTabBar() {
     let items = TabBarItem.allCases
+    tabBar.backgroundColor = .systemBackground
+    tabBar.tintColor = items.first?.color
 
     viewControllers = items.map {
       switch $0 {
@@ -65,15 +68,19 @@ final class TabBarController: UITabBarController {
 
     viewControllers?.enumerated().forEach { (index, viewController) in
       let item = items[index]
+      let selectedImage = UIImage(systemName: item.selectedImageName)?.withTintColor(item.color,
+                                                                                     renderingMode: .alwaysOriginal)
       let tabBarItem = UITabBarItem(title: item.title,
                                     image: UIImage(systemName: item.imageName),
-                                    selectedImage: UIImage(systemName: item.selectedImageName))
+                                    selectedImage: selectedImage)
       tabBarItem.tag = index
       viewController.tabBarItem = tabBarItem
     }
   }
 
   override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    tabBar.tintColor = TabBarItem(rawValue: item.tag)?.color
+
     if let imageView = animationImages?[item.tag] {
       imageView.transform = CGAffineTransform(rotationAngle: .pi / 2)
       UIView.animate(withDuration: 0.8,
@@ -91,6 +98,7 @@ final class TabBarController: UITabBarController {
 
     for item in TabBarItem.allCases {
       if let imageView = tabBar.subviews[item.rawValue].subviews.first as? UIImageView {
+        imageView.image?.withTintColor(.red)
         imageView.contentMode = .center
         imageViews.append(imageView)
       }

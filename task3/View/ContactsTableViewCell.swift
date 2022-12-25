@@ -51,6 +51,7 @@ final class ContactsTableViewCell: UITableViewCell {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
     button.configuration = UIButton.Configuration.plain()
+    button.configuration?.baseForegroundColor = FavoritesContactsViewController.mainColor
 
     return button
   }()

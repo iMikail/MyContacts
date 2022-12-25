@@ -8,6 +8,8 @@
 import UIKit
 
 final class FavoritesContactsViewController: UIViewController {
+  static let mainColor = UIColor.systemPurple
+  
   private let contactsManager = ContactsManager.shared
 
   // MARK: - UIViews
@@ -17,6 +19,9 @@ final class FavoritesContactsViewController: UIViewController {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.separatorStyle = .singleLine
+    tableView.separatorColor = FavoritesContactsViewController.mainColor
+    tableView.separatorInset = UIEdgeInsets(top: 0, left: 15.0, bottom: 0, right: 15.0)
 
     return tableView
   }()

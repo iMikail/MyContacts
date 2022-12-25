@@ -72,10 +72,10 @@ final class DetailViewController: UIViewController {
     stackView.spacing = spacing
     stackView.layoutMargins = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
     stackView.isLayoutMarginsRelativeArrangement = true
-    stackView.backgroundColor = .lightGray
+    stackView.backgroundColor = .systemGray6
     stackView.layer.cornerRadius = 13.0
     stackView.layer.borderWidth = 2.0
-    stackView.layer.borderColor = UIColor.darkGray.cgColor
+    stackView.layer.borderColor = ContactsViewController.mainColor.cgColor
 
     return stackView
   }()
@@ -83,7 +83,7 @@ final class DetailViewController: UIViewController {
   // MARK: - Functions
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
+    view.backgroundColor = .systemBackground
     setupViews()
   }
 
@@ -104,8 +104,10 @@ final class DetailViewController: UIViewController {
   private func updateButtonTitle() {
     if isEditing {
       editButton.title = NSLocalizedString(AppLocalization.DetailVC.saveButton.key, comment: "")
+      editButton.tintColor = .systemRed
     } else {
       editButton.title = NSLocalizedString(AppLocalization.DetailVC.editButton.key, comment: "")
+      editButton.tintColor = ContactsViewController.mainColor
     }
   }
 

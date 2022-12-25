@@ -8,6 +8,8 @@
 import UIKit
 
 final class ContactsViewController: UIViewController {
+  static let mainColor = UIColor.systemCyan
+
   // MARK: - Variables
   private let contactsManager = ContactsManager.shared
   private var isLoaded = false {
@@ -29,6 +31,9 @@ final class ContactsViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     tableView.isHidden = true
+    tableView.separatorStyle = .singleLine
+    tableView.separatorColor = ContactsViewController.mainColor
+    tableView.separatorInset = UIEdgeInsets(top: 0, left: 15.0, bottom: 0, right: 15.0)
 
     return tableView
   }()

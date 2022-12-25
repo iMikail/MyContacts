@@ -55,7 +55,7 @@ final class ContactsManager {
   }
 
   private func loadContacts() {
-    DispatchQueue.global(qos: .background).async {
+    DispatchQueue.global(qos: .userInitiated).async {
       let store = CNContactStore()
       let keysToFetch = [
         CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
