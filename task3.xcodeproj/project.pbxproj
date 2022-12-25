@@ -7,21 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A809D51E29533D8C007C85F7 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A809D51D29533D8C007C85F7 /* ContactsManager.swift */; };
 		A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315429509FB200FDB541 /* AppDelegate.swift */; };
 		A88A315729509FB200FDB541 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315629509FB200FDB541 /* SceneDelegate.swift */; };
-		A88A315929509FB200FDB541 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315829509FB200FDB541 /* ViewController.swift */; };
+		A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A315829509FB200FDB541 /* ContactsViewController.swift */; };
 		A88A315E29509FB400FDB541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A88A315D29509FB400FDB541 /* Assets.xcassets */; };
 		A88A316129509FB400FDB541 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A88A315F29509FB400FDB541 /* LaunchScreen.storyboard */; };
+		A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */; };
+		A88A316E2950D21600FDB541 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A316D2950D21600FDB541 /* TabBarController.swift */; };
+		A88A31722951A5A700FDB541 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A88A31742951A5A700FDB541 /* Localizable.strings */; };
+		A88A31772951A71300FDB541 /* AppLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31762951A71300FDB541 /* AppLocalization.swift */; };
+		A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */; };
+		A88A317D2951ABE100FDB541 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A317C2951ABE100FDB541 /* Contact.swift */; };
+		A8C27A622955EB68002ADEF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8C27A642955EB68002ADEF4 /* InfoPlist.strings */; };
+		A8E9C3FE2954531400D65C29 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E9C3FD2954531400D65C29 /* DetailViewController.swift */; };
+		A8F3C8EA2956E76E0042AE36 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3C8E92956E76E0042AE36 /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A809D51D29533D8C007C85F7 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
 		A88A315129509FB200FDB541 /* task3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88A315429509FB200FDB541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A88A315629509FB200FDB541 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A88A315829509FB200FDB541 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A88A315829509FB200FDB541 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		A88A315D29509FB400FDB541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "task3/Supporting files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		A88A316029509FB400FDB541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A88A316229509FB400FDB541 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "task3/Supporting files/Info.plist"; sourceTree = SOURCE_ROOT; };
+		A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesContactsViewController.swift; sourceTree = "<group>"; };
+		A88A316D2950D21600FDB541 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		A88A31732951A5A700FDB541 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A88A31752951A5BF00FDB541 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A88A31762951A71300FDB541 /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
+		A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		A88A317C2951ABE100FDB541 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		A8C27A632955EB68002ADEF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A8C27A652955EB6B002ADEF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A8E9C3FD2954531400D65C29 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A8F3C8E92956E76E0042AE36 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A809D51C29533D6F007C85F7 /* Contacts Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A809D51D29533D8C007C85F7 /* ContactsManager.swift */,
+			);
+			path = "Contacts Manager";
+			sourceTree = "<group>";
+		};
 		A88A314829509FB200FDB541 = {
 			isa = PBXGroup;
 			children = (
@@ -54,9 +84,12 @@
 		A88A315329509FB200FDB541 /* task3 */ = {
 			isa = PBXGroup;
 			children = (
-				A88A315429509FB200FDB541 /* AppDelegate.swift */,
-				A88A315629509FB200FDB541 /* SceneDelegate.swift */,
-				A88A315829509FB200FDB541 /* ViewController.swift */,
+				A8F3C8E82956E75B0042AE36 /* Storage */,
+				A809D51C29533D6F007C85F7 /* Contacts Manager */,
+				A88A317B2951ABCD00FDB541 /* Model */,
+				A88A31782951AAC100FDB541 /* View */,
+				A88A316A2950B9E300FDB541 /* Controller */,
+				A88A316F2951A56D00FDB541 /* Localization */,
 				A88A31682950A0EF00FDB541 /* Supporting files */,
 			);
 			path = task3;
@@ -65,11 +98,58 @@
 		A88A31682950A0EF00FDB541 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				A88A315629509FB200FDB541 /* SceneDelegate.swift */,
+				A88A315429509FB200FDB541 /* AppDelegate.swift */,
 				A88A315D29509FB400FDB541 /* Assets.xcassets */,
 				A88A315F29509FB400FDB541 /* LaunchScreen.storyboard */,
 				A88A316229509FB400FDB541 /* Info.plist */,
 			);
 			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		A88A316A2950B9E300FDB541 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A88A315829509FB200FDB541 /* ContactsViewController.swift */,
+				A8E9C3FD2954531400D65C29 /* DetailViewController.swift */,
+				A88A316B2950BA2400FDB541 /* FavoritesContactsViewController.swift */,
+				A88A316D2950D21600FDB541 /* TabBarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A88A316F2951A56D00FDB541 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				A88A31762951A71300FDB541 /* AppLocalization.swift */,
+				A8C27A642955EB68002ADEF4 /* InfoPlist.strings */,
+				A88A31742951A5A700FDB541 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		A88A31782951AAC100FDB541 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A88A31792951AAE800FDB541 /* ContactsTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A88A317B2951ABCD00FDB541 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A88A317C2951ABE100FDB541 /* Contact.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A8F3C8E82956E75B0042AE36 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				A8F3C8E92956E76E0042AE36 /* Storage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -115,6 +195,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = A88A314829509FB200FDB541;
 			productRefGroup = A88A315229509FB200FDB541 /* Products */;
@@ -132,6 +213,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A88A316129509FB400FDB541 /* LaunchScreen.storyboard in Resources */,
+				A8C27A622955EB68002ADEF4 /* InfoPlist.strings in Resources */,
+				A88A31722951A5A700FDB541 /* Localizable.strings in Resources */,
 				A88A315E29509FB400FDB541 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +224,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		A88A31692950A20200FDB541 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -163,8 +247,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A88A315929509FB200FDB541 /* ViewController.swift in Sources */,
+				A88A317D2951ABE100FDB541 /* Contact.swift in Sources */,
+				A8F3C8EA2956E76E0042AE36 /* Storage.swift in Sources */,
+				A809D51E29533D8C007C85F7 /* ContactsManager.swift in Sources */,
+				A88A317A2951AAE800FDB541 /* ContactsTableViewCell.swift in Sources */,
+				A88A31772951A71300FDB541 /* AppLocalization.swift in Sources */,
+				A88A315929509FB200FDB541 /* ContactsViewController.swift in Sources */,
+				A88A316C2950BA2400FDB541 /* FavoritesContactsViewController.swift in Sources */,
 				A88A315529509FB200FDB541 /* AppDelegate.swift in Sources */,
+				A8E9C3FE2954531400D65C29 /* DetailViewController.swift in Sources */,
+				A88A316E2950D21600FDB541 /* TabBarController.swift in Sources */,
 				A88A315729509FB200FDB541 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +272,24 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		A88A31742951A5A700FDB541 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A88A31732951A5A700FDB541 /* en */,
+				A88A31752951A5BF00FDB541 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		A8C27A642955EB68002ADEF4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8C27A632955EB68002ADEF4 /* en */,
+				A8C27A652955EB6B002ADEF4 /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -187,6 +297,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -247,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
