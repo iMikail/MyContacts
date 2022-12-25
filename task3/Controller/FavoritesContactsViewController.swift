@@ -9,7 +9,7 @@ import UIKit
 
 final class FavoritesContactsViewController: UIViewController {
   static let mainColor = UIColor.systemPurple
-  
+
   private let contactsManager = ContactsManager.shared
 
   // MARK: - UIViews
