@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  MyContacts
+
+  Created by Misha Volkov on 20.12.22.
+  
+*/
+
+"titleTabBarItemContactsList" = "Список контактов";
+"titleTabBarItemFavoritesContacts" = "Любимые контакты";
+"titleLoadContactsButton" = "Загрузить контакты";
+"accessMessageForDeniedStatus" = "Пожалуйста, предоставьте доступ к контактной книге";
+"titleAppOptionsButton" = "Настройки";
+"titleEditContactTabBarButton" = "Редактировать";
+"titleSaveContactTabBarButton" = "Сохранить";
+"phoneNumber" = "Номер телефона";
+"fullName" = "ФИО";
+"titleCopyPhoneAlertAction" = "Скопировать телефон";
+"titleSharePhoneAlertAction" = "Поделиться телефоном";
+"titleDeleteContactAlertAction" = "Удалить контакт";
+"cancel" = "Отмена";
