@@ -1,0 +1,21 @@
+/*
+  Localizable.strings
+  MyContacts
+
+  Created by Misha Volkov on 20.12.22.
+
+*/
+
+"titleTabBarItemContactsList" = "Contacts list";
+"titleTabBarItemFavoritesContacts" = "Favorites contacts";
+"titleLoadContactsButton" = "Load contacts";
+"accessMessageForDeniedStatus" = "Please provide access to the contact book";
+"titleAppOptionsButton" = "Options";
+"titleEditContactTabBarButton" = "Edit";
+"titleSaveContactTabBarButton" = "Save";
+"phoneNumber" = "Phone number";
+"fullName" = "Full name";
+"titleCopyPhoneAlertAction" = "Copy phone";
+"titleSharePhoneAlertAction" = "Share phone";
+"titleDeleteContactAlertAction" = "Delete contact";
+"cancel" = "Cancel";
