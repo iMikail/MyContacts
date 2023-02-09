@@ -84,12 +84,10 @@
 		A88A315329509FB200FDB541 /* task3 */ = {
 			isa = PBXGroup;
 			children = (
-				A8F3C8E82956E75B0042AE36 /* Storage */,
-				A809D51C29533D6F007C85F7 /* Contacts Manager */,
 				A88A317B2951ABCD00FDB541 /* Model */,
 				A88A31782951AAC100FDB541 /* View */,
 				A88A316A2950B9E300FDB541 /* Controller */,
-				A88A316F2951A56D00FDB541 /* Localization */,
+				A8E2213029957BE800AF96A5 /* Services */,
 				A88A31682950A0EF00FDB541 /* Supporting files */,
 			);
 			path = task3;
@@ -142,6 +140,16 @@
 				A88A317C2951ABE100FDB541 /* Contact.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A8E2213029957BE800AF96A5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A809D51C29533D6F007C85F7 /* Contacts Manager */,
+				A88A316F2951A56D00FDB541 /* Localization */,
+				A8F3C8E82956E75B0042AE36 /* Storage */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		A8F3C8E82956E75B0042AE36 /* Storage */ = {
